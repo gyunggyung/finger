@@ -1,0 +1,54 @@
+<html lang="ko">
+
+    <meta charset="utf-8">
+    <title>Adbookmark</title>
+
+    <head>
+
+        <script src="jquery-1.12.4.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+
+        <nav class="sidebar">
+
+            <button class="goto active" target="1">Move 1</button>
+            <button class="goto" target="2">Move 2</button>
+            <button class="goto" target="3">Move 3</button>
+            <button class="goto" target="4">Move 4</button>
+            <button class="goto" target="5">Move 5</button>
+            <button class="goto" target="6">Move 6</button>
+            <button class="goto" target="7">Move 7</button>
+        </nav>
+
+        <div class="content" id="content1"></div>
+        <div class="content" id="content2">
+            <button class="gourl">Move 2</button>
+        </div>
+        <div class="content" id="content3"></div>
+        <div class="content" id="content4"></div>
+        <div class="content" id="content5"></div>
+        <div class="content" id="content6"></div>
+        <div class="content" id="content7"></div>
+    </body>
+
+    <script>
+        $(function(){
+            $(window).scroll(function(){
+                var height = $('#content1').height();
+                var scroll_y = $(document).scrollTop();
+                var current = Math.floor(scroll_y/height) + 1;
+
+                $('.active').removeClass('active');
+                $('.goto[target=' + current + ']').addClass('active');
+            });
+
+            $('.goto').click(function(){
+                var target = $(this).attr('target');
+                var scrollTop = $('#content' + target).offset().top;
+                $('html, body').stop().animate({scrollTop:scrollTop}, 700, 'swing');
+            });
+        });
+    </script>
+</html>
